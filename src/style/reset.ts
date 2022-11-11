@@ -39,6 +39,7 @@ const reset = css`
   body {
     margin: 0;
     line-height: inherit;
+    font-family: 'Noto Sans KR', sans-serif;
   }
   hr {
     height: 0;
