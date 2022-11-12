@@ -47,7 +47,7 @@ const StyledHeader = css`
       height: 30px;
       display: flex;
       align-items: center;
-      > a {
+      > li {
         margin-right: 20px;
       }
     }

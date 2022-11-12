@@ -17,21 +17,23 @@ const Header = () => {
             <ul>
               <li>로그인</li>
               <li>회원가입</li>
-              <li>장바구니</li>
+              <li>
+                <Link to="/cart">장바구니</Link>
+              </li>
             </ul>
           </div>
         </div>
         <nav className="global-nav">
           <ul>
-            <Link to="/">
-              <li>
+            <li>
+              <Link to="/">
                 <MenuIcon width="16px" height="16px" />
-              </li>
-            </Link>
-            {type.map((item: string) => (
-              <Link to={`/type/${item.toLowerCase()}`} key={item}>
-                <li>{item.replace('_', ' ')}</li>
               </Link>
+            </li>
+            {type.map((item: string) => (
+              <li key={item}>
+                <Link to={`/type/${item.toLowerCase()}`}>{item.replace('_', ' ')}</Link>
+              </li>
             ))}
           </ul>
         </nav>

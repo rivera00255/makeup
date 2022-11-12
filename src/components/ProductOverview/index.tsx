@@ -6,7 +6,7 @@ import StyledProductOverview from './StyledProductOverview';
 
 const ProductOverview = () => {
   const location = useLocation();
-  //   console.log(location.state);
+  // console.log(location.state);
   const product: Product = useMemo(() => location.state, [location.state]);
 
   return (
@@ -29,18 +29,26 @@ const ProductOverview = () => {
               </div>
             </div>
             <div className="order">
-              <div className="color">
-                {product.product_colors.map((color: productColors, i: number) => (
-                  <div key={i} style={{ color: `${color.hex_value}` }}>
-                    <input type="radio" name="color" />
-                    {color.colour_name}
-                  </div>
-                ))}
+              <div className="option">
+                {product.product_colors.length > 0 &&
+                  product.product_colors.map((color: productColors, i: number) => (
+                    <label key={i}>
+                      <input
+                        type="radio"
+                        name="color"
+                        style={{ background: `${color.hex_value}` }}
+                        onChange={() => {
+                          console.log(color.colour_name);
+                        }}
+                      />
+                      <p>{color.colour_name}</p>
+                    </label>
+                  ))}
               </div>
-              <div className="quantity">
-                <input type="number" />
-              </div>
-              <button>주문하기</button>
+              <div className="cart-preview"></div>
+              <input type="text" defaultValue={`\$ ${product.price}`} readOnly className="price" />
+              <button>장바구니 담기</button>
+              {/* <button>바로 주문하기</button> */}
             </div>
           </div>
         </div>
