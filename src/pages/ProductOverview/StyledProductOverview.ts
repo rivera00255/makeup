@@ -52,6 +52,10 @@ const StyledProductOverview = css`
       padding: 4px 16px;
       border-radius: 5px;
       font-size: 14px;
+      &:disabled {
+        background: #bbb;
+        color: #f5f5f5;
+      }
     }
     .price {
       display: block;
