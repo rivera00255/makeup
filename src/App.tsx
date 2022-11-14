@@ -6,7 +6,7 @@ import Header from './components/Header';
 import Main from './pages/Main';
 import Footer from './components/Footer';
 import ProductList from './pages/ProductList';
-import ProductOverview from './components/ProductOverview';
+import ProductOverview from './pages/ProductOverview';
 import CartList from './pages/CartList';
 
 function App() {

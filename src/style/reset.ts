@@ -208,6 +208,12 @@ const reset = css`
   [hidden] {
     display: none;
   }
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
 `;
 
 export default reset;
