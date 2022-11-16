@@ -26,23 +26,37 @@ const StyledCartList = css`
     display: flex;
     .product-image {
       width: 120px;
-      height: 120px;
-      background: #eee;
+      max-height: 120px;
       margin-right: 40px;
+      object-fit: contain;
+      overflow: hidden;
+      > img {
+        width: 100%;
+        height: auto;
+      }
     }
     .product-info {
       width: calc(100% - 136px);
+      position: relative;
     }
     .order-option {
       width: 100%;
       display: flex;
       justify-content: space-between;
+      font-weight: 200;
+      color: #888;
+      font-size: 14px;
       > div {
         display: flex;
         > p {
           margin-right: 30px;
         }
       }
+    }
+    .delete-button {
+      position: absolute;
+      top: 0;
+      right: 0;
     }
   }
   .order-summary {
@@ -67,6 +81,15 @@ const StyledCartList = css`
     font-size: 14px;
     width: 100%;
     margin-top: 16px;
+  }
+  .reset-button {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #888;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0 8px;
   }
 `;
 

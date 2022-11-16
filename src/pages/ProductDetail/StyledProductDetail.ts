@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-const StyledProductOverview = css`
+const StyledProductDetail = css`
   .container {
     width: 1020px;
     margin: 0 auto;
@@ -94,9 +94,9 @@ const StyledProductOverview = css`
     font-size: 13px;
     button {
       background: #fff;
-      border: 1px solid #888;
+      border: 2px solid #ddd;
       border-radius: 5px;
-      padding: 0 8px;
+      padding: 0 5px;
     }
     .selected {
       border-top: 1px dashed #ddd;
@@ -113,8 +113,9 @@ const StyledProductOverview = css`
       display: flex;
       > input[type='number'] {
         max-width: 48px;
-        padding: 0 8px;
         margin-right: 8px;
+        border-radius: 5px;
+        text-align: center;
       }
       > button {
         margin: 0 2px;
@@ -122,8 +123,14 @@ const StyledProductOverview = css`
     }
     .delete-button {
       flex-grow: calc(1 / 8);
+      padding: 2px 0;
+      border: none;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 `;
 
-export default StyledProductOverview;
+export default StyledProductDetail;

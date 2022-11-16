@@ -34,11 +34,14 @@ const ProductList = () => {
         <h3>Cosmetics</h3>
         <h4>{type.toLocaleUpperCase()}</h4>
         <div className="list">
-          {products?.map((item: Product) => (
-            <Link to={`./${item.id}`} key={item.id} state={item}>
-              <ProductPreview {...item} />
-            </Link>
-          ))}
+          {products?.map(
+            (item: Product) =>
+              item.price > 0 && (
+                <Link to={`./${item.id}`} key={item.id} state={item}>
+                  <ProductPreview {...item} />
+                </Link>
+              )
+          )}
         </div>
       </div>
     </section>

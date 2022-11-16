@@ -1,3 +1,4 @@
+import Option from './Option';
 import productColors from './ProductColors';
 
 class Product {
@@ -12,6 +13,8 @@ class Product {
   product_type: string;
   product_colors: productColors[];
   tag_list: string[];
+  orderOption?: Option[];
+  totalCount?: number;
 }
 
 export default Product;

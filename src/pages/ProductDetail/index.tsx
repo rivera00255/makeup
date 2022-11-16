@@ -2,9 +2,14 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Product from 'src/entity/Product';
 import productColors from 'src/entity/ProductColors';
-import StyledProductOverview from './StyledProductOverview';
+import { ReactComponent as AddIcon } from '../../assets/icon/plus-small.svg';
+import { ReactComponent as SubIcon } from '../../assets/icon/minus-small.svg';
+import { ReactComponent as CloseIcon } from '../../assets/icon/cross.svg';
+import StyledProductDetail from './StyledProductDetail';
+import { useDispatch } from 'react-redux';
+import { add } from 'src/store/slices/cartSlice';
 
-const ProductOverview = () => {
+const ProductDetail = () => {
   const location = useLocation();
   // console.log(location.state);
   const product: Product = useMemo(() => location.state, [location.state]);
@@ -13,11 +18,11 @@ const ProductOverview = () => {
   // console.log(option);
   const [stock, setStock] = useState(true);
 
+  const dispatch = useDispatch();
+
   const handleTotalPrice = () => {
     let count = 0;
-    Array.from(option.values()).map((item) => {
-      count += item.quantity;
-    });
+    Array.from(option.values()).map((item) => (count += item.quantity));
     if (count > 0) {
       return product.price * count;
     } else {
@@ -31,6 +36,14 @@ const ProductOverview = () => {
     return quan;
   };
 
+  const handleAddCart = () => {
+    if (product.product_colors.length > 1) {
+      Array.from(option.values()).length > 0 && dispatch(add({ ...product, orderOption: Array.from(option.values()) }));
+    } else {
+      dispatch(add({ ...product, orderOption: Array.from(option.values()) }));
+    }
+  };
+
   useEffect(() => {
     let soldout = 0;
     product.product_colors.map((item) => item.colour_name === null && soldout++);
@@ -38,7 +51,7 @@ const ProductOverview = () => {
   }, []);
 
   return (
-    <section css={StyledProductOverview}>
+    <section css={StyledProductDetail}>
       <div className="container">
         <div className="product-wrapper">
           <div className="detail">
@@ -92,14 +105,14 @@ const ProductOverview = () => {
                             option.set(item.color, { ...item, quantity: quantityValidation(option.get(item.color).quantity - 1) });
                             setOption((option) => new Map([...option]));
                           }}>
-                          -
+                          <SubIcon width="12px" height="12px" />
                         </button>
                         <button
                           onClick={() => {
                             option.set(item.color, { ...item, quantity: quantityValidation(option.get(item.color).quantity + 1) });
                             setOption((option) => new Map([...option]));
                           }}>
-                          +
+                          <AddIcon width="12px" height="12px" />
                         </button>
                       </div>
                       <button
@@ -108,18 +121,14 @@ const ProductOverview = () => {
                           option.delete(item.color);
                           setOption((option) => new Map([...option]));
                         }}>
-                        x
+                        <CloseIcon width="8px" height="8px" />
                       </button>
                     </div>
                   ))}
                 </div>
               )}
               <input type="text" value={'$ ' + Number(handleTotalPrice()).toFixed(1)} readOnly className="price" />
-              <button
-                onClick={() => {
-                  console.log(option);
-                }}
-                disabled={!stock}>
+              <button onClick={() => handleAddCart()} disabled={!stock}>
                 {stock ? '장바구니 담기' : '품 절'}
               </button>
               {/* <button>바로 주문하기</button> */}
@@ -131,4 +140,4 @@ const ProductOverview = () => {
   );
 };
 
-export default ProductOverview;
+export default ProductDetail;
