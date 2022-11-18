@@ -14,7 +14,8 @@ class Product {
   product_colors: productColors[];
   tag_list: string[];
   orderOption?: Option[];
-  totalCount?: number;
+  orderCount?: number;
+  orderPrice?: number;
 }
 
 export default Product;

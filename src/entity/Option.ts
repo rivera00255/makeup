@@ -1,5 +1,5 @@
 class Option {
-  color: string;
+  color?: string;
   quantity: number;
 }
 

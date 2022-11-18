@@ -16,6 +16,8 @@ const ProductDetail = () => {
 
   const [option, setOption] = useState(new Map());
   // console.log(option);
+  const [count, setCount] = useState(1);
+  // console.log(count);
   const [stock, setStock] = useState(true);
 
   const dispatch = useDispatch();
@@ -38,9 +40,12 @@ const ProductDetail = () => {
 
   const handleAddCart = () => {
     if (product.product_colors.length > 1) {
-      Array.from(option.values()).length > 0 && dispatch(add({ ...product, orderOption: Array.from(option.values()) }));
+      let totalCount = 0;
+      Array.from(option.values()).length > 0 && Array.from(option.values()).map((item) => (totalCount += item.quantity));
+      dispatch(add({ ...product, orderOption: Array.from(option.values()), orderCount: totalCount, orderPrice: Number(product.price * totalCount) }));
+      // Array.from(option.values()).length > 0 && dispatch(add({ ...product, orderOption: Array.from(option.values()) }));
     } else {
-      dispatch(add({ ...product, orderOption: Array.from(option.values()) }));
+      dispatch(add({ ...product, orderCount: count, orderPrice: Number(product.price * count) }));
     }
   };
 
@@ -70,7 +75,7 @@ const ProductDetail = () => {
               </div>
             </div>
             <div className="order">
-              {product.product_colors.length > 1 && (
+              {product.product_colors.length > 1 ? (
                 <div className="option">
                   {product.product_colors.map((color: productColors, i: number) => (
                     <label key={i}>
@@ -85,6 +90,16 @@ const ProductDetail = () => {
                       <p>{color.colour_name !== null ? color.colour_name : '품절'}</p>
                     </label>
                   ))}
+                </div>
+              ) : (
+                <div className="count">
+                  <input type="number" value={count} onChange={(e) => setCount(quantityValidation(Number(e.target.value)))} />
+                  <button>
+                    <SubIcon width="12px" height="12px" onClick={() => setCount(quantityValidation(count - 1))} />
+                  </button>
+                  <button>
+                    <AddIcon width="12px" height="12px" onClick={() => setCount(quantityValidation(count + 1))} />
+                  </button>
                 </div>
               )}
               {Array.from(option.values()).length > 0 && (

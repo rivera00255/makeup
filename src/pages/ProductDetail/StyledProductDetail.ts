@@ -108,19 +108,6 @@ const StyledProductDetail = css`
     .color {
       flex-grow: calc(7 / 8);
     }
-    .count {
-      flex-grow: calc(1 / 8);
-      display: flex;
-      > input[type='number'] {
-        max-width: 48px;
-        margin-right: 8px;
-        border-radius: 5px;
-        text-align: center;
-      }
-      > button {
-        margin: 0 2px;
-      }
-    }
     .delete-button {
       flex-grow: calc(1 / 8);
       padding: 2px 0;
@@ -129,6 +116,31 @@ const StyledProductDetail = css`
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+  }
+  .count {
+    flex-grow: calc(1 / 8);
+    display: flex;
+    > input[type='number'] {
+      max-width: 48px;
+      margin-right: 8px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    > button {
+      margin: 0 2px;
+    }
+  }
+  .order > .count {
+    background: #f5f5f5;
+    border-radius: 5px;
+    padding: 10px 16px;
+    font-size: 13px;
+    > button {
+      background: #fff;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      padding: 0 5px;
     }
   }
 `;
