@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 
 const StyledHeader = css`
   border-bottom: 1px solid #ebebeb;
+  background: #fff;
   .container {
     width: 1020px;
     margin: 0 auto;
@@ -43,6 +44,7 @@ const StyledHeader = css`
   }
   .global-nav {
     width: 100%;
+    position: relative;
     > ul {
       height: 30px;
       display: flex;

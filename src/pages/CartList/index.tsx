@@ -53,11 +53,22 @@ const CartList = () => {
               전체 삭제
             </button>
             <div className="summary">
-              <div>price: {getTotalOrderPrice()}</div>
-              <div>shipping</div>
-              <div>total</div>
+              <div>
+                <p>상품금액</p>
+                <p>{getTotalOrderPrice()}</p>
+              </div>
+              <div>
+                <p>배송비</p>
+                <p></p>
+              </div>
+              <div>
+                <p>총 주문금액</p>
+                <p>
+                  <strong></strong>
+                </p>
+              </div>
             </div>
-            <button className="order-button">Order</button>
+            <button className="order-button">주문하기</button>
           </div>
         </div>
       </div>

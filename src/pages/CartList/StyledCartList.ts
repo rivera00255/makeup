@@ -69,8 +69,13 @@ const StyledCartList = css`
     padding: 10px 10px 20px 10px;
     div {
       border-bottom: 1px solid #888;
-      padding: 10px 0;
+      padding: 10px;
       font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      > p {
+        display: inline-block;
+      }
     }
   }
   .order-button {
