@@ -27,12 +27,20 @@ const StyledSignUp = css`
       border: 1px solid #ddd;
       border-radius: 5px;
       padding: 4px;
+      font-size: 15px;
+    }
+    input::placeholder {
+      font-size: 14px;
+      font-weight: 300;
     }
     input[type='file'] {
       width: 0;
       height: 0;
       padding: 0;
       border: 0;
+    }
+    .error {
+      outline: 1px solid #000;
     }
     label {
       display: flex;
@@ -80,6 +88,12 @@ const StyledSignUp = css`
       display: flex;
       justify-content: center;
       margin: 40px 0;
+    }
+    .error-message {
+      margin-left: 8px;
+      text-align: center;
+      font-size: 13px;
+      color: #888;
     }
   }
 `;
