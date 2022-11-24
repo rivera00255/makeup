@@ -10,7 +10,7 @@ import { ReactComponent as CloseIcon } from '../../assets/icon/cross.svg';
 const CartList = () => {
   const products = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-  // console.log(products);
+  console.log(products);
   const [checklist, setChecklist] = useState<Product[]>([...products]);
   // console.log(checklist);
 

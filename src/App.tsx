@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import MyPage from './pages/MyPage';
 
 const Main = lazy(() => import('./pages/Main'));
 const ProductList = lazy(() => import('./pages/ProductList'));
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/type/:productType" element={<ProductList />} />
                     <Route path="/type/:productType/*" element={<ProductDetail />} />
                     <Route path="/cart" element={<CartList />} />
+                    <Route path="/mypage" element={<MyPage />} />
                   </Routes>
                 </Suspense>
               </>
