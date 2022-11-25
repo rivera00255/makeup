@@ -1,6 +1,30 @@
 import { css } from '@emotion/react';
 
 const StyledOrderInfo = css`
+  .list-nav {
+    width: 960px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #444;
+    display: flex;
+    button {
+      border: 1px solid #888;
+      border-radius: 5px;
+      padding: 2px 10px;
+    }
+    .button-wrapper {
+      > button {
+        margin-right: 4px;
+      }
+    }
+    .download-button {
+      border: none;
+      background: #ebebeb;
+      font-weight: 300;
+      margin-left: 4px;
+    }
+  }
   table {
     width: 960px;
     max-width: 960px;
@@ -20,7 +44,7 @@ const StyledOrderInfo = css`
     }
     .order {
       text-align: left;
-      padding-left: 40px;
+      padding-left: 20px;
       img {
         max-width: 60px;
         height: auto;

@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Data } from 'src/data';
-import Order from 'src/entity/Order';
+import * as XLSX from 'xlsx';
 import StyledOrderInfo from './StyledOrderInfo';
 
 // mock order data
@@ -22,13 +23,43 @@ const orderList = Array(20)
   }));
 
 const OrderInfo = () => {
-  //   console.log(orderList);
+  // const [orders, setOrders] = useState(orderList);
+
+  const downloadExcel = (data: any) => {
+    const list = data.reduce(
+      (acc: any, cur: any) => [
+        ...acc,
+        {
+          주문일: cur.createdAt.toLocaleDateString(),
+          주문상태: cur.order.status.value,
+          주문내역: `${cur.order.order[0].name}(${cur.order.order[0].orderCount}개) \$${cur.order.order[0].orderPrice}`,
+        },
+      ],
+      []
+    );
+    const file = XLSX.utils.json_to_sheet(list);
+    const book = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(book, file, 'xls');
+    XLSX.writeFile(book, `list_${new Date().toLocaleDateString().replaceAll('.', '_')}.xlsx`);
+  };
+  // console.log(orders);
+
   return (
     <div css={StyledOrderInfo}>
+      <div className="list-nav">
+        {/* <div className="button-wrapper">
+          <button>전체보기</button>
+          <button>결제완료</button>
+          <button>배송중</button>
+          <button>배송완료</button>
+        </div> */}
+        <button className="download-button" onClick={() => downloadExcel(orderList)}>
+          Excel 다운로드
+        </button>
+      </div>
       <table>
         <thead>
           <tr>
-            <td>No.</td>
             <td>주문내역</td>
             <td>주문일</td>
             <td>상태</td>
@@ -37,7 +68,6 @@ const OrderInfo = () => {
         <tbody>
           {orderList.map((order) => (
             <tr key={order.id}>
-              <td>{order.id}</td>
               <td className="order">
                 {order.order.order.map((item) => (
                   <div key={item.id}>
