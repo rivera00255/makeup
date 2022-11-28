@@ -18,7 +18,7 @@ const Main = () => {
         <h3>이 달의 브랜드</h3>
         <div className="list">
           {products?.map((item: Product) => (
-            <Link to={`/type/${item.product_type}/${item.id}`} state={item} key={item.id}>
+            <Link to={`/product/${item.id}`} state={item} key={item.id}>
               <ProductPreview {...item} />
             </Link>
           ))}

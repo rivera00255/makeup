@@ -1,11 +1,20 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import StyledHeader from './StyledHeader';
 import { ReactComponent as MenuIcon } from '../../assets/icon/menu-burger.svg';
 import BrandAppBar from '../BrandAppBar';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'src/store';
+import { removeCredentails } from 'src/store/slices/authSlice';
+
+export const type = ['Blush', 'Bronzer', 'EyeBrow', 'Eyeliner', 'Eyeshadow', 'Foundation', 'Lip_Liner', 'Lipstick', 'Mascara', 'Nail_Polish'];
 
 const Header = () => {
-  const type = ['Blush', 'Bronzer', 'EyeBrow', 'Eyeliner', 'Eyeshadow', 'Foundation', 'Lip_Liner', 'Lipstick', 'Mascara', 'Nail_Polish'];
+  const auth = useSelector((state: RootState) => state.auth);
+  // console.log(auth);
+  const dispatch = useDispatch();
+
   const [visibleAppBar, setVisibleAppBar] = useState(false);
 
   return (
@@ -15,15 +24,29 @@ const Header = () => {
           <h1>
             <Link to="/">Makeup</Link>
           </h1>
-          <input type="search" placeholder="Search..." />
+          {/* <input type="search" placeholder="Search..." /> */}
           <div className="user-menu">
             <ul>
-              <li>
-                <Link to="/login">로그인</Link>
-              </li>
-              <li>
-                <Link to="/signup">회원가입</Link>
-              </li>
+              {auth.username ? (
+                <>
+                  <li style={{ cursor: 'pointer' }} onClick={() => dispatch(removeCredentails())}>
+                    로그아웃
+                  </li>
+                  <li>
+                    <Link to="/mypage">마이페이지</Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/login">로그인</Link>
+                  </li>
+                  <li>
+                    <Link to="/signup">회원가입</Link>
+                  </li>
+                </>
+              )}
+
               <li>
                 <Link to="/cart">장바구니</Link>
               </li>

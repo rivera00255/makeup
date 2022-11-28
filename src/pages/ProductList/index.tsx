@@ -37,7 +37,7 @@ const ProductList = () => {
           {products?.map(
             (item: Product) =>
               item.price > 0 && (
-                <Link to={`./${item.id}`} key={item.id} state={item}>
+                <Link to={`/product/${item.id}`} key={item.id} state={item}>
                   <ProductPreview {...item} />
                 </Link>
               )

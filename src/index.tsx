@@ -10,7 +10,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: {},
+    queries: {
+      refetchOnWindowFocus: false,
+    },
   },
 });
 

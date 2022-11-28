@@ -19,6 +19,10 @@ const StyledLogin = css`
     padding: 8px 0;
     margin: 4px;
   }
+  button[type='button'] {
+    background: #ddd;
+    color: #888;
+  }
   form {
     width: calc(100% - 32px);
     margin: 0 auto;

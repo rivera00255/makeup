@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
+import { Link } from 'react-router-dom';
 import { useOutsideClick } from 'src/hooks/useOutsideClick';
 import StyledSideBar from './StyledBrandAppBar';
 
@@ -12,7 +13,11 @@ const BrandAppBar = (props: { visibleAppBar: boolean; setVisibleAppBar: Dispatch
       <h4>Brands List</h4>
       <ul>
         {brands.map((brand) => (
-          <li key={brand}>{brand}</li>
+          <li key={brand}>
+            <Link to={`/brand/${brand}`} onClick={() => props.setVisibleAppBar(false)}>
+              {brand}
+            </Link>
+          </li>
         ))}
       </ul>
     </div>
