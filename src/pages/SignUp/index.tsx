@@ -143,13 +143,13 @@ const SignUp = () => {
               </div>
             </div>
           </label>
-          <label>
+          {/* <label>
             <div>프로필 사진</div>
             <div className="input-file">
               파일 첨부
               <input type="file" />
             </div>
-          </label>
+          </label> */}
           <div>
             <button>가입하기</button>
           </div>

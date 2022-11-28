@@ -12,6 +12,7 @@ const StyledBrandAppBar = css`
   letter-spacing: 1.5px;
   font-weight: 200;
   color: #fff;
+  z-index: 1;
   > h4 {
     display: block;
     margin: 4px 0 10px 10px;
