@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/makeup/static/css/main.e6c13ad2.css",
+    "main.js": "/makeup/static/js/main.14edad30.js",
+    "static/js/410.2036071e.chunk.js": "/makeup/static/js/410.2036071e.chunk.js",
+    "static/js/987.d056495c.chunk.js": "/makeup/static/js/987.d056495c.chunk.js",
+    "static/js/657.af37750b.chunk.js": "/makeup/static/js/657.af37750b.chunk.js",
+    "static/js/96.8e7d5df1.chunk.js": "/makeup/static/js/96.8e7d5df1.chunk.js",
+    "static/js/787.1e693262.chunk.js": "/makeup/static/js/787.1e693262.chunk.js",
+    "static/js/717.155c2562.chunk.js": "/makeup/static/js/717.155c2562.chunk.js",
+    "static/media/banner_1920_03.jpg": "/makeup/static/media/banner_1920_03.41291dd7c4ad4d6d037d.jpg",
+    "static/media/banner_1920_02.jpg": "/makeup/static/media/banner_1920_02.1b43323022ea4dd78144.jpg",
+    "static/media/banner_1920_01.jpg": "/makeup/static/media/banner_1920_01.ad19338112fb588168b1.jpg",
+    "index.html": "/makeup/index.html",
+    "static/media/loading.svg": "/makeup/static/media/loading.ead7bb6c54f36ced5d781f6de3e4584a.svg",
+    "static/media/cross.svg": "/makeup/static/media/cross.7547ed76b90d5776991c702ed4c38e65.svg",
+    "static/media/gift.svg": "/makeup/static/media/gift.f69a085b8e5207207a4bc0019d6035c3.svg",
+    "static/media/angle-left.svg": "/makeup/static/media/angle-left.f22ee9e46352a72f47faa0e167cbf5ef.svg",
+    "static/media/plus-small.svg": "/makeup/static/media/plus-small.d59c3ddf04134fe397d3621c5523ea7e.svg",
+    "static/media/menu-burger.svg": "/makeup/static/media/menu-burger.230ce7ebac47221f71ff65a4369a1d1e.svg",
+    "static/media/minus-small.svg": "/makeup/static/media/minus-small.abdb6408e3df95378acc5f3c19fdf781.svg",
+    "main.e6c13ad2.css.map": "/makeup/static/css/main.e6c13ad2.css.map",
+    "main.14edad30.js.map": "/makeup/static/js/main.14edad30.js.map",
+    "410.2036071e.chunk.js.map": "/makeup/static/js/410.2036071e.chunk.js.map",
+    "987.d056495c.chunk.js.map": "/makeup/static/js/987.d056495c.chunk.js.map",
+    "657.af37750b.chunk.js.map": "/makeup/static/js/657.af37750b.chunk.js.map",
+    "96.8e7d5df1.chunk.js.map": "/makeup/static/js/96.8e7d5df1.chunk.js.map",
+    "787.1e693262.chunk.js.map": "/makeup/static/js/787.1e693262.chunk.js.map",
+    "717.155c2562.chunk.js.map": "/makeup/static/js/717.155c2562.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.14edad30.js"
+  ]
+}
