@@ -109,7 +109,7 @@ const CartList = () => {
               <div>
                 <p>총 주문금액</p>
                 <p>
-                  <strong>$ {checklist.length > 0 ? getTotalOrderPrice() + getShippingPrice() : '0'}</strong>
+                  <strong>$ {checklist.length > 0 ? (getTotalOrderPrice() + getShippingPrice()).toFixed(2) : '0'}</strong>
                 </p>
               </div>
             </div>

@@ -1,15 +1,17 @@
 import React, { useMemo } from 'react';
 import StyledMain from './StyledMain';
 import { useQuery } from '@tanstack/react-query';
-import { getMainProducts } from 'src/hooks/queries/products';
 import Product from 'src/entity/Product';
 import ProductPreview from 'src/components/ProductPreveiw';
 import { Link } from 'react-router-dom';
 import Carousel from 'src/components/Carousel';
 import { ReactComponent as GiftIcon } from '../../assets/icon/gift.svg';
+import axios from 'axios';
 
 const Main = () => {
-  const { data: productData } = useQuery(['product'], getMainProducts);
+  const { data: productData } = useQuery(['product'], () => {
+    return axios.get(`${process.env.REACT_APP_API_URL}?brand=glossier`);
+  });
 
   const products = useMemo(() => productData?.data.slice(0, 4), [productData]);
   // console.log(products);

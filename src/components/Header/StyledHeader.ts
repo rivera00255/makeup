@@ -15,9 +15,10 @@ const StyledHeader = css`
     position: relative;
     > h1 {
       display: block;
-      flex-grow: calc(9 / 10);
+      /* flex-grow: calc(9 / 10); */
+      font-weight: 700;
     }
-    > input {
+    /* > input {
       flex-grow: calc(1 / 10);
       border: 1px solid #ddd;
       padding: 4px 10px;
@@ -26,7 +27,7 @@ const StyledHeader = css`
       &::placeholder {
         color: #bbb;
       }
-    }
+    } */
   }
   .user-menu {
     position: absolute;
@@ -51,6 +52,12 @@ const StyledHeader = css`
       align-items: center;
       > li {
         margin-right: 20px;
+        &:hover {
+          color: #888;
+        }
+      }
+      .active {
+        font-weight: 600;
       }
     }
   }

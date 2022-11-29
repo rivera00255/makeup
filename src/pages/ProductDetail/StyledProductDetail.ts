@@ -27,6 +27,22 @@ const StyledProductDetail = css`
       margin-top: 10px;
       font-weight: 300;
       font-size: 15px;
+      max-height: 400px;
+      overflow-y: auto;
+      &::-webkit-scrollbar-track {
+        border-radius: 5px;
+        background-color: #f5f5f5;
+      }
+
+      &::-webkit-scrollbar {
+        width: 10px;
+        background-color: #f5f5f5;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: #ddd;
+      }
     }
   }
   .order {

@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { removeCredentails } from 'src/store/slices/authSlice';
+import Logo from '../../assets/images/logo.png';
 
 export const type = ['Blush', 'Bronzer', 'EyeBrow', 'Eyeliner', 'Eyeshadow', 'Foundation', 'Lip_Liner', 'Lipstick', 'Mascara', 'Nail_Polish'];
 
@@ -22,7 +23,9 @@ const Header = () => {
       <div className="container">
         <div className="local-nav">
           <h1>
-            <Link to="/">Makeup</Link>
+            <Link to="/">
+              <img src={Logo} alt="logo" style={{ width: '200px', height: 'auto' }} />
+            </Link>
           </h1>
           {/* <input type="search" placeholder="Search..." /> */}
           <div className="user-menu">

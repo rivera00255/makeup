@@ -6,10 +6,10 @@ import { type } from 'src/components/Header';
 import Loading from 'src/components/Loading';
 import ProductPreview from 'src/components/ProductPreveiw';
 import Product from 'src/entity/Product';
-import { baseUrl } from 'src/hooks/queries/products';
 import StyledBrandShop from './StyledBrandShop';
 
 const BrandShop = () => {
+  const baseUrl = process.env.REACT_APP_API_URL;
   const { brandName } = useParams();
   //   console.log(brandName);
   const [productType, setProductType] = useState('');
@@ -46,6 +46,7 @@ const BrandShop = () => {
           </select>
         </div>
         <div className="list">
+          {product?.length < 1 && <div>No Product...</div>}
           {product?.map((item: Product) => (
             <Link to={`/product/${item.id}`} key={item.id} state={item}>
               <ProductPreview {...item} />

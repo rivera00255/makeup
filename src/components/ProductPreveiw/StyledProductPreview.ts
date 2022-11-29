@@ -4,7 +4,7 @@ const StyledProductPreview = css`
   width: 210px;
   text-align: center;
   margin: 20px 0;
-  .tumbnail {
+  .thumbnail {
     width: 100%;
     > img {
       width: 100%;

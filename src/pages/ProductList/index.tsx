@@ -5,22 +5,17 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Loading from 'src/components/Loading';
 import ProductPreview from 'src/components/ProductPreveiw';
 import Product from 'src/entity/Product';
-import { getProductsByType } from 'src/hooks/queries/products';
 import StyledProductList from './StyledProductList';
 
 const ProductList = () => {
   const { productType } = useParams();
   const type = productType?.toString() as string;
-  // const location = useLocation();
-  // const type: string = location.pathname.split('/')[2];
+  const baseUrl = process.env.REACT_APP_API_URL;
+
   const navigate = useNavigate();
 
-  // const { data: productData } = useQuery(['product', type], () => {
-  //   const response = axios.get(`${baseUrl}?product_type=${type}`);
-  //   return response;
-  // });
   const { data: productData, isLoading } = useQuery(['product', type], () => {
-    const response = getProductsByType(type);
+    const response = axios.get(`${baseUrl}?product_type=${type}`);
     return response;
   });
   // console.log(productData?.data.slice(0, 5));

@@ -14,9 +14,9 @@ const MyPage = () => {
             <li>
               <button>주문내역</button>
             </li>
-            <li>
+            {/* <li>
               <button>회원정보</button>
-            </li>
+            </li> */}
           </ul>
         </nav>
         <OrderInfo />

@@ -37,6 +37,7 @@ const StyledLogin = css`
       color: #888;
       > li {
         margin: 0 4px;
+        cursor: pointer;
       }
     }
     input {

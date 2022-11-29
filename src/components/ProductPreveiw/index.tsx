@@ -5,7 +5,7 @@ import StyledProductPreview from './StyledProductPreview';
 const ProductPreview = (item: Product) => {
   return (
     <div css={StyledProductPreview}>
-      <div className="tumbnail">
+      <div className="thumbnail">
         <LazyImage src={item.api_featured_image} name={item.name} />
         {/* <img src={item.api_featured_image} alt={item.name} /> */}
       </div>
