@@ -42,7 +42,11 @@ const ProductDetail = () => {
     if (product.product_colors.length > 1) {
       let totalCount = 0;
       Array.from(option.values()).length > 0 && Array.from(option.values()).map((item) => (totalCount += item.quantity));
-      dispatch(add({ ...product, orderOption: Array.from(option.values()), orderCount: totalCount, orderPrice: Number(product.price * totalCount) }));
+      if (product.price * totalCount > 0) {
+        dispatch(add({ ...product, orderOption: Array.from(option.values()), orderCount: totalCount, orderPrice: Number(product.price * totalCount) }));
+      } else {
+        alert('색상을 선택해주세요.');
+      }
       // Array.from(option.values()).length > 0 && dispatch(add({ ...product, orderOption: Array.from(option.values()) }));
     } else {
       dispatch(add({ ...product, orderCount: count, orderPrice: Number(product.price * count) }));
