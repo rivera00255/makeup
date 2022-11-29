@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <Global styles={reset} />
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route
             path="/*"
