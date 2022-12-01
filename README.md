@@ -24,4 +24,5 @@
 **kevinryan**(id) / **kev02937@**(password) 로그인
 
 ### ▷ API 명세
-![screen04](https://user-images.githubusercontent.com/93629526/204957335-ae153942-98d7-449b-b3a6-3ad9d8f92cbf.jpg)
+
+![screen04](https://user-images.githubusercontent.com/93629526/205013683-de502605-c9d6-4d16-ad84-92b71647cff4.jpg)
