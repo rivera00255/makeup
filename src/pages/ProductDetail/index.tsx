@@ -8,11 +8,30 @@ import { ReactComponent as CloseIcon } from '../../assets/icon/cross.svg';
 import StyledProductDetail from './StyledProductDetail';
 import { useDispatch } from 'react-redux';
 import { add } from 'src/store/slices/cartSlice';
+import NotFound from 'src/components/NotFound';
 
 const ProductDetail = () => {
   const location = useLocation();
   // console.log(location.state);
-  const product: Product = useMemo(() => location.state, [location.state]);
+
+  const product: Product = useMemo(() => {
+    if (!location.state) {
+      return {
+        id: 0,
+        name: '',
+        api_featured_image: '',
+        image_link: '',
+        brand: '',
+        category: '',
+        description: '',
+        price: 0,
+        product_type: '',
+        product_colors: [],
+        tag_list: [],
+      };
+    }
+    return location.state;
+  }, [location.state]);
 
   const [option, setOption] = useState(new Map());
   // console.log(option);
@@ -39,7 +58,7 @@ const ProductDetail = () => {
   };
 
   const handleAddCart = () => {
-    if (product.product_colors.length > 1) {
+    if (product.product_colors?.length > 1) {
       let totalCount = 0;
       Array.from(option.values()).length > 0 && Array.from(option.values()).map((item) => (totalCount += item.quantity));
       if (product.price * totalCount > 0) {
@@ -55,10 +74,11 @@ const ProductDetail = () => {
 
   useEffect(() => {
     let soldout = 0;
-    product.product_colors.map((item) => item.colour_name === null && soldout++);
-    product.product_colors.length > 1 && product.product_colors.length === soldout && setStock(false);
+    product.product_colors?.map((item) => item.colour_name === null && soldout++);
+    product.product_colors?.length > 1 && product.product_colors.length === soldout && setStock(false);
   }, []);
 
+  if (product.id === 0) return <NotFound />;
   return (
     <section css={StyledProductDetail}>
       <div className="container">
@@ -79,7 +99,7 @@ const ProductDetail = () => {
               </div>
             </div>
             <div className="order">
-              {product.product_colors.length > 1 ? (
+              {product.product_colors?.length > 1 ? (
                 <div className="option">
                   {product.product_colors.map((color: productColors, i: number) => (
                     <label key={i}>
