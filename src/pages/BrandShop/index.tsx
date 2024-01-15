@@ -5,15 +5,13 @@ import { Link, useParams } from 'react-router-dom';
 import { type } from 'src/components/Header';
 import Loading from 'src/components/Loading';
 import ProductPreview from 'src/components/ProductPreveiw';
-import Product from 'src/entity/Product';
 import StyledBrandShop from './StyledBrandShop';
+import { Product } from 'src/types/type';
 
 const BrandShop = () => {
   const baseUrl = process.env.REACT_APP_API_URL;
   const { brandName } = useParams();
-  //   console.log(brandName);
   const [productType, setProductType] = useState('');
-  // console.log(productType);
 
   const { data: productData, isLoading } = useQuery(['product', brandName, productType], () => {
     const response = axios.get(`${baseUrl}/?brand=${brandName}&product_type=${productType}`);
@@ -21,7 +19,6 @@ const BrandShop = () => {
   });
 
   const product = useMemo(() => productData?.data, [productData]);
-  //   console.log(product);
 
   useEffect(() => {
     setProductType('');

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useMemo } from 'react';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Loading from 'src/components/Loading';
 import ProductPreview from 'src/components/ProductPreveiw';
-import Product from 'src/entity/Product';
+import { Product } from 'src/types/type';
 import StyledProductList from './StyledProductList';
 
 const ProductList = () => {
@@ -12,13 +12,10 @@ const ProductList = () => {
   const type = productType?.toString() as string;
   const baseUrl = process.env.REACT_APP_API_URL;
 
-  const navigate = useNavigate();
-
   const { data: productData, isLoading } = useQuery(['product', type], () => {
     const response = axios.get(`${baseUrl}?product_type=${type}`);
     return response;
   });
-  // console.log(productData?.data.slice(0, 5));
 
   const products = useMemo(() => productData?.data, [productData]);
 

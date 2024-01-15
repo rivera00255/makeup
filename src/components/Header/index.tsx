@@ -13,7 +13,7 @@ export const type = ['Blush', 'Bronzer', 'EyeBrow', 'Eyeliner', 'Eyeshadow', 'Fo
 
 const Header = () => {
   const auth = useSelector((state: RootState) => state.auth);
-  // console.log(auth);
+
   const dispatch = useDispatch();
 
   const [visibleAppBar, setVisibleAppBar] = useState(false);
@@ -27,7 +27,6 @@ const Header = () => {
               <img src={Logo} alt="logo" style={{ width: '200px', height: 'auto' }} />
             </Link>
           </h1>
-          {/* <input type="search" placeholder="Search..." /> */}
           <div className="user-menu">
             <ul>
               {auth.username ? (

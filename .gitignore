@@ -24,3 +24,4 @@ yarn-error.log*
 
 # My ignore
 .env
+.vscode

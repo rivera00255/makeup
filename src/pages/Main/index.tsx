@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import StyledMain from './StyledMain';
 import { useQuery } from '@tanstack/react-query';
-import Product from 'src/entity/Product';
+import { Product } from 'src/types/type';
 import ProductPreview from 'src/components/ProductPreveiw';
 import { Link } from 'react-router-dom';
 import Carousel from 'src/components/Carousel';
@@ -9,12 +9,12 @@ import { ReactComponent as GiftIcon } from '../../assets/icon/gift.svg';
 import axios from 'axios';
 
 const Main = () => {
-  const { data: productData } = useQuery(['product'], () => {
-    return axios.get(`${process.env.REACT_APP_API_URL}?brand=glossier`);
+  const recommendBrand = 'glossier';
+  const { data: productData } = useQuery(['product', recommendBrand], () => {
+    return axios.get(`${process.env.REACT_APP_API_URL}?brand=${recommendBrand}`);
   });
 
   const products = useMemo(() => productData?.data.slice(0, 4), [productData]);
-  // console.log(products);
 
   return (
     <section css={StyledMain}>

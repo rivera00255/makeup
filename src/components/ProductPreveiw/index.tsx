@@ -7,7 +7,6 @@ const ProductPreview = (item: Product) => {
     <div css={StyledProductPreview}>
       <div className="thumbnail">
         <LazyImage src={item.api_featured_image} name={item.name} />
-        {/* <img src={item.api_featured_image} alt={item.name} /> */}
       </div>
       <div className="info">
         <p className="info-brand">{item.brand}</p>

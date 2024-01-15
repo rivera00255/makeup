@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Product from 'src/entity/Product';
-import productColors from 'src/entity/ProductColors';
+import { Product, ProductColors } from 'src/types/type';
 import { ReactComponent as AddIcon } from '../../assets/icon/plus-small.svg';
 import { ReactComponent as SubIcon } from '../../assets/icon/minus-small.svg';
 import { ReactComponent as CloseIcon } from '../../assets/icon/cross.svg';
@@ -9,10 +8,10 @@ import StyledProductDetail from './StyledProductDetail';
 import { useDispatch } from 'react-redux';
 import { add } from 'src/store/slices/cartSlice';
 import NotFound from 'src/components/NotFound';
+import { calculateOption, getTotalPrice, validateQuantity } from './utilities';
 
 const ProductDetail = () => {
   const location = useLocation();
-  // console.log(location.state);
 
   const product: Product = useMemo(() => {
     if (!location.state) {
@@ -34,30 +33,12 @@ const ProductDetail = () => {
   }, [location.state]);
 
   const [option, setOption] = useState(new Map());
-  // console.log(option);
   const [count, setCount] = useState(1);
-  // console.log(count);
   const [stock, setStock] = useState(true);
 
   const dispatch = useDispatch();
 
-  const handleTotalPrice = () => {
-    let count = 0;
-    Array.from(option.values()).map((item) => (count += item.quantity));
-    if (count > 0) {
-      return product.price * count;
-    } else {
-      return product.price;
-    }
-  };
-
-  const quantityValidation = (quan: number) => {
-    if (quan < 1) return 1;
-    if (quan > 999) return 999;
-    return quan;
-  };
-
-  const handleAddCart = () => {
+  const addCart = (option: Map<string, { color: string; quantity: number }>, product: Product, count: number) => {
     if (product.product_colors?.length > 1) {
       let totalCount = 0;
       Array.from(option.values()).length > 0 && Array.from(option.values()).map((item) => (totalCount += item.quantity));
@@ -66,7 +47,6 @@ const ProductDetail = () => {
       } else {
         alert('색상을 선택해주세요.');
       }
-      // Array.from(option.values()).length > 0 && dispatch(add({ ...product, orderOption: Array.from(option.values()) }));
     } else {
       dispatch(add({ ...product, orderCount: count, orderPrice: Number(product.price * count) }));
     }
@@ -101,7 +81,7 @@ const ProductDetail = () => {
             <div className="order">
               {product.product_colors?.length > 1 ? (
                 <div className="option">
-                  {product.product_colors.map((color: productColors, i: number) => (
+                  {product.product_colors.map((color: ProductColors, i: number) => (
                     <label key={i}>
                       <input
                         type="radio"
@@ -117,12 +97,12 @@ const ProductDetail = () => {
                 </div>
               ) : (
                 <div className="count">
-                  <input type="number" value={count} onChange={(e) => setCount(quantityValidation(Number(e.target.value)))} />
+                  <input type="number" value={count} onChange={(e) => setCount(validateQuantity(Number(e.target.value)))} />
                   <button>
-                    <SubIcon width="12px" height="12px" onClick={() => setCount(quantityValidation(count - 1))} />
+                    <SubIcon width="12px" height="12px" onClick={() => setCount(validateQuantity(count - 1))} />
                   </button>
                   <button>
-                    <AddIcon width="12px" height="12px" onClick={() => setCount(quantityValidation(count + 1))} />
+                    <AddIcon width="12px" height="12px" onClick={() => setCount(validateQuantity(count + 1))} />
                   </button>
                 </div>
               )}
@@ -136,20 +116,22 @@ const ProductDetail = () => {
                           type="number"
                           value={item.quantity}
                           onChange={(e) => {
-                            setOption((prev) => new Map([...prev, [item.color, { ...item, quantity: quantityValidation(Number(e.target.value)) }]]));
+                            setOption((prev) => new Map([...prev, [item.color, { ...item, quantity: validateQuantity(Number(e.target.value)) }]]));
                           }}
                         />
                         <button
                           onClick={() => {
-                            option.set(item.color, { ...item, quantity: quantityValidation(option.get(item.color).quantity - 1) });
-                            setOption((option) => new Map([...option]));
+                            // option.set(item.color, { ...item, quantity: validateQuantity(option.get(item.color).quantity - 1) });
+                            const calculatedOption = calculateOption(option, item, 'subtract');
+                            setOption((option) => new Map([...calculatedOption]));
                           }}>
                           <SubIcon width="12px" height="12px" />
                         </button>
                         <button
                           onClick={() => {
-                            option.set(item.color, { ...item, quantity: quantityValidation(option.get(item.color).quantity + 1) });
-                            setOption((option) => new Map([...option]));
+                            // option.set(item.color, { ...item, quantity: validateQuantity(option.get(item.color).quantity + 1) });
+                            const calculatedOption = calculateOption(option, item, 'add');
+                            setOption((option) => new Map([...calculatedOption]));
                           }}>
                           <AddIcon width="12px" height="12px" />
                         </button>
@@ -166,11 +148,10 @@ const ProductDetail = () => {
                   ))}
                 </div>
               )}
-              <input type="text" value={'$ ' + Number(handleTotalPrice()).toFixed(1)} readOnly className="price" />
-              <button onClick={() => handleAddCart()} disabled={!stock}>
+              <input type="text" value={'$ ' + Number(getTotalPrice(option, product)).toFixed(1)} readOnly className="price" />
+              <button onClick={() => addCart(option, product, count)} disabled={!stock}>
                 {stock ? '장바구니 담기' : '품 절'}
               </button>
-              {/* <button>바로 주문하기</button> */}
             </div>
           </div>
         </div>

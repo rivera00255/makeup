@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Option from 'src/entity/Option';
-import Product from 'src/entity/Product';
+import { Option, Product } from 'src/types/type';
 import { RootState } from 'src/store';
 import { remove, reset } from 'src/store/slices/cartSlice';
 import StyledCartList from './StyledCartList';
@@ -10,20 +9,21 @@ import { ReactComponent as CloseIcon } from '../../assets/icon/cross.svg';
 const CartList = () => {
   const products = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-  // console.log(products);
   const [checklist, setChecklist] = useState<Product[]>([...products]);
-  // console.log(checklist);
 
-  const getTotalOrderPrice = useCallback(() => {
+  const getTotalOrderPrice = useCallback((checklist: Product[]) => {
     let price = 0;
     checklist.map((item) => (price += Number(item.orderPrice)));
     return price;
-  }, [checklist]);
+  }, []);
 
-  const getShippingPrice = useCallback(() => {
-    if (getTotalOrderPrice() <= 200) return 10;
-    return 0;
-  }, [getTotalOrderPrice]);
+  const getShippingPrice = useCallback(
+    (checklist: Product[]) => {
+      if (getTotalOrderPrice(checklist) <= 200) return 10;
+      return 0;
+    },
+    [getTotalOrderPrice]
+  );
 
   return (
     <section css={StyledCartList}>
@@ -88,7 +88,6 @@ const CartList = () => {
             ))}
           </div>
           <div className="order-summary">
-            {/* <button className="option-button">선택 삭제</button> */}
             <button
               className="option-button"
               onClick={() => {
@@ -100,16 +99,16 @@ const CartList = () => {
             <div className="summary">
               <div>
                 <p>상품금액</p>
-                <p>$ {getTotalOrderPrice()}</p>
+                <p>$ {getTotalOrderPrice(checklist)}</p>
               </div>
               <div>
                 <p>배송비</p>
-                <p>$ {checklist.length > 0 ? getShippingPrice() : '0'}</p>
+                <p>$ {checklist.length > 0 ? getShippingPrice(checklist) : '0'}</p>
               </div>
               <div>
                 <p>총 주문금액</p>
                 <p>
-                  <strong>$ {checklist.length > 0 ? (getTotalOrderPrice() + getShippingPrice()).toFixed(2) : '0'}</strong>
+                  <strong>$ {checklist.length > 0 ? (getTotalOrderPrice(checklist) + getShippingPrice(checklist)).toFixed(2) : '0'}</strong>
                 </p>
               </div>
             </div>

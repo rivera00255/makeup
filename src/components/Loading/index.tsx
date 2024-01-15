@@ -31,7 +31,6 @@ const StyledLoading = css`
 const Loading = () => {
   return (
     <div css={StyledLoading}>
-      {/* <div className="test"></div> */}
       <LoadingIcon width="80px" height="80px" fill="#fff" className="animate" />
     </div>
   );
