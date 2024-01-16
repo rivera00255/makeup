@@ -1,6 +1,4 @@
-import { css } from '@emotion/react';
-
-const StyledBrandAppBar = css`
+.bar {
   position: fixed;
   top: 0;
   left: 0;
@@ -30,6 +28,4 @@ const StyledBrandAppBar = css`
       cursor: pointer;
     }
   }
-`;
-
-export default StyledBrandAppBar;
+}

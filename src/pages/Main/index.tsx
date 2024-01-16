@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import StyledMain from './StyledMain';
 import { useQuery } from '@tanstack/react-query';
 import { Product } from 'src/types/type';
 import ProductPreview from 'src/components/ProductPreveiw';
@@ -7,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Carousel from 'src/components/Carousel';
 import { ReactComponent as GiftIcon } from '../../assets/icon/gift.svg';
 import axios from 'axios';
+import styles from './main.module.scss';
 
 const Main = () => {
   const recommendBrand = 'glossier';
@@ -17,13 +17,13 @@ const Main = () => {
   const products = useMemo(() => productData?.data.slice(0, 4), [productData]);
 
   return (
-    <section css={StyledMain}>
-      <div className="container">
-        <div className="banner">
+    <section>
+      <div className={styles.container}>
+        <div className={styles.banner}>
           <Carousel />
         </div>
         <h3>이 달의 브랜드</h3>
-        <div className="list">
+        <div className={styles.list}>
           {products?.map((item: Product) => (
             <Link to={`/product/${item.id}`} state={item} key={item.id}>
               <ProductPreview {...item} />
@@ -31,7 +31,7 @@ const Main = () => {
           ))}
         </div>
         <h3>이벤트</h3>
-        <div className="event">
+        <div className={styles.event}>
           <div style={{ background: '#f8bbd0' }}>
             <GiftIcon width="200px" height="200px" fill="#fff" />
           </div>
@@ -46,7 +46,7 @@ const Main = () => {
           </div>
         </div>
         <h3>뉴스</h3>
-        <div className="news">
+        <div className={styles.news}>
           <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
           <div>hasellus ut accumsan dolor. Praesent imperdiet est in dui consectetur feugiat.</div>
           <div>Mauris accumsan nisl elementum magna mollis fermentum.</div>

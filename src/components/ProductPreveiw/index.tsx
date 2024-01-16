@@ -1,17 +1,17 @@
-import Product from 'src/entity/Product';
+import { Product } from 'src/types/type';
 import LazyImage from '../LazyImage';
-import StyledProductPreview from './StyledProductPreview';
+import styles from './preview.module.scss';
 
 const ProductPreview = (item: Product) => {
   return (
-    <div css={StyledProductPreview}>
-      <div className="thumbnail">
+    <div className={styles.container}>
+      <div className={styles.thumbnail}>
         <LazyImage src={item.api_featured_image} name={item.name} />
       </div>
-      <div className="info">
-        <p className="info-brand">{item.brand}</p>
-        <p className="info-name">{item.name}</p>
-        <p className="info-price">${item.price}</p>
+      <div className={styles.info}>
+        <p className={styles.infoBrand}>{item.brand}</p>
+        <p className={styles.infoName}>{item.name}</p>
+        <p className={styles.infoPrice}>${item.price}</p>
       </div>
     </div>
   );

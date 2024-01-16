@@ -1,10 +1,9 @@
-import StyledSignUp from './StyledSignUp';
+import styles from './signup.module.scss';
 import { ReactComponent as LeftArrowIcon } from '../../assets/icon/angle-left.svg';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useState } from 'react';
-import User from 'src/entity/User';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -14,22 +13,12 @@ const SignUp = () => {
     address1: '',
   });
 
-  // daum postcode script url
   const open = useDaumPostcodePopup('http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js');
 
   const handleAddress = (data: any) => {
     let fullAddress = data.address;
     let postcode = data.zonecode;
-    // let extraAddress = '';
-    // if (data.addressType === 'R') {
-    //   if (data.bname !== '') {
-    //     extraAddress += data.bname;
-    //   }
-    //   if (data.buildingName !== '') {
-    //     extraAddress += extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
-    //   }
-    //   fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
-    // }
+
     setValue('address1', fullAddress);
     setAddress((prev) => ({ ...prev, postcode: postcode, address1: fullAddress }));
   };
@@ -62,11 +51,10 @@ const SignUp = () => {
       alert('작성한 내용을 다시 확인해주세요.');
     }
   };
-  // console.log(errors);
 
   return (
-    <section css={StyledSignUp}>
-      <div className="container">
+    <section>
+      <div className={styles.container}>
         <button style={{ background: '#ebebeb' }} onClick={() => navigate(-1)}>
           <LeftArrowIcon width="14px" height="14px" />
         </button>
@@ -80,9 +68,9 @@ const SignUp = () => {
               {...register('username', {
                 pattern: /^[a-zA-Z0-9]{4,16}/,
               })}
-              className={errors.username ? 'error' : ''}
+              className={errors.username ? `${styles.error}` : ''}
             />
-            {errors.username?.type === 'pattern' && <p className="error-message">영문 대소문자, 4~16자 이내로 입력해주세요.</p>}
+            {errors.username?.type === 'pattern' && <p className={styles.errorMessage}>영문 대소문자, 4~16자 이내로 입력해주세요.</p>}
           </label>
           <label>
             <div>이메일</div>
@@ -91,13 +79,13 @@ const SignUp = () => {
               {...register('email', {
                 pattern: /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
               })}
-              className={errors.email ? 'error' : ''}
+              className={errors.email ? `${styles.error}` : ''}
             />
-            {errors.email?.type === 'pattern' && <p className="error-message">올바른 형식의 이메일을 입력해주세요.</p>}
+            {errors.email?.type === 'pattern' && <p className={styles.errorMessage}>올바른 형식의 이메일을 입력해주세요.</p>}
           </label>
           <label>
             <div>비밀번호</div>
-            <div className="row">
+            <div className={styles.row}>
               <input
                 type="password"
                 style={{ marginBottom: '8px' }}
@@ -105,7 +93,7 @@ const SignUp = () => {
                 {...register('password', {
                   pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/,
                 })}
-                className={errors.password ? 'error' : ''}
+                className={errors.password ? `${styles.error}` : ''}
               />
               <input
                 type="password"
@@ -116,7 +104,7 @@ const SignUp = () => {
               />
             </div>
           </label>
-          {errors.password?.type === 'pattern' && <p className="error-message">영문/숫자/특수문자(@$!%*#?&) 포함 8자리 이상 입력해주세요.</p>}
+          {errors.password?.type === 'pattern' && <p className={styles.errorMessage}>영문/숫자/특수문자(@$!%*#?&) 포함 8자리 이상 입력해주세요.</p>}
           <label>
             <div>휴대폰 번호</div>
             <input
@@ -125,13 +113,13 @@ const SignUp = () => {
               {...register('phone', {
                 pattern: /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/g,
               })}
-              className={errors.phone ? 'error' : ''}
+              className={errors.phone ? `${styles.error}` : ''}
             />
-            {errors.phone?.type === 'pattern' && <p className="error-message">숫자만 입력해주세요.</p>}
+            {errors.phone?.type === 'pattern' && <p className={styles.errorMessage}>숫자만 입력해주세요.</p>}
           </label>
-          <label className="address">
+          <label className={styles.address}>
             <div>주소</div>
-            <div className="row">
+            <div className={styles.row}>
               <div>
                 <input type="text" readOnly style={{ outline: 'none' }} {...register('address1')} />
                 <button type="button" onClick={() => handlePostcode()}>
@@ -143,13 +131,6 @@ const SignUp = () => {
               </div>
             </div>
           </label>
-          {/* <label>
-            <div>프로필 사진</div>
-            <div className="input-file">
-              파일 첨부
-              <input type="file" />
-            </div>
-          </label> */}
           <div>
             <button>가입하기</button>
           </div>

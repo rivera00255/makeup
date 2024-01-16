@@ -1,4 +1,4 @@
-import StyledLogin from './StyledLogin';
+import styles from './login.module.scss';
 import { ReactComponent as LeftArrowIcon } from '../../assets/icon/angle-left.svg';
 import { useNavigate } from 'react-router-dom';
 import { SyntheticEvent, useRef } from 'react';
@@ -52,8 +52,8 @@ const Login = () => {
   };
 
   return (
-    <section css={StyledLogin}>
-      <div className="container">
+    <section>
+      <div className={styles.container}>
         <button style={{ background: '#ebebeb', padding: '8px' }} onClick={() => navigate(-1)}>
           <LeftArrowIcon width="14px" height="14px" />
         </button>

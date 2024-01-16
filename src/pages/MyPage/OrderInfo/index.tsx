@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Data } from 'src/data';
 import * as XLSX from 'xlsx';
-import StyledOrderInfo from './StyledOrderInfo';
+import styles from './orderInfo.module.scss';
 
 // mock order data
 const getRandomOrder = () => Data[Math.floor(Math.random() * 3)];
@@ -45,15 +45,15 @@ const OrderInfo = () => {
   // console.log(orders);
 
   return (
-    <div css={StyledOrderInfo}>
-      <div className="list-nav">
+    <div>
+      <div className={styles.listNav}>
         {/* <div className="button-wrapper">
           <button>전체보기</button>
           <button>결제완료</button>
           <button>배송중</button>
           <button>배송완료</button>
         </div> */}
-        <button className="download-button" onClick={() => downloadExcel(orderList)}>
+        <button className={styles.downloadButton} onClick={() => downloadExcel(orderList)}>
           Excel 다운로드
         </button>
       </div>
@@ -68,13 +68,13 @@ const OrderInfo = () => {
         <tbody>
           {orderList.map((order) => (
             <tr key={order.id}>
-              <td className="order">
+              <td className={styles.order}>
                 {order.order.order.map((item) => (
                   <div key={item.id}>
-                    <div className="col">
+                    <div className={styles.col}>
                       <img src={item.api_featured_image} alt={item.name} />
                     </div>
-                    <div className="col">
+                    <div className={styles.col}>
                       <div>
                         <p>{item.brand}</p>
                         <p>{item.category}</p>

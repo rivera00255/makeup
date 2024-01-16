@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import StyledHeader from './StyledHeader';
 import { ReactComponent as MenuIcon } from '../../assets/icon/menu-burger.svg';
 import BrandAppBar from '../BrandAppBar';
 import { useState } from 'react';
@@ -8,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { removeCredentails } from 'src/store/slices/authSlice';
 import Logo from '../../assets/images/logo.png';
+import styles from './header.module.scss';
 
 export const type = ['Blush', 'Bronzer', 'EyeBrow', 'Eyeliner', 'Eyeshadow', 'Foundation', 'Lip_Liner', 'Lipstick', 'Mascara', 'Nail_Polish'];
 
@@ -19,15 +19,15 @@ const Header = () => {
   const [visibleAppBar, setVisibleAppBar] = useState(false);
 
   return (
-    <header css={StyledHeader}>
-      <div className="container">
-        <div className="local-nav">
+    <header className={styles.header}>
+      <div className={styles.container}>
+        <div className={styles.localNav}>
           <h1>
             <Link to="/">
               <img src={Logo} alt="logo" style={{ width: '200px', height: 'auto' }} />
             </Link>
           </h1>
-          <div className="user-menu">
+          <div className={styles.userMenu}>
             <ul>
               {auth.username ? (
                 <>
@@ -55,7 +55,7 @@ const Header = () => {
             </ul>
           </div>
         </div>
-        <nav className="global-nav">
+        <nav className={styles.globalNav}>
           <ul>
             <li onClick={() => setVisibleAppBar(true)} style={{ cursor: 'pointer' }}>
               <MenuIcon width="16px" height="16px" />

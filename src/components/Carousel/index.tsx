@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
-import StyledCarousel from './StyledCarousel';
+import styles from './carousel.module.scss';
 import Image01 from '../../assets/images/banner_1920_01.jpg';
 import Image02 from '../../assets/images/banner_1920_02.jpg';
 import Image03 from '../../assets/images/banner_1920_03.jpg';
@@ -18,15 +18,15 @@ const Carousel = () => {
   };
 
   return (
-    <div css={StyledCarousel}>
+    <div className={styles.carousel}>
       <Slider {...settings}>
-        <div className="slide">
+        <div className={styles.slide}>
           <img src={Image01} alt="cosmetics" />
         </div>
-        <div className="slide">
+        <div className={styles.slide}>
           <img src={Image02} alt="cosmetics" />
         </div>
-        <div className="slide">
+        <div className={styles.slide}>
           <img src={Image03} alt="cosmetics" />
         </div>
       </Slider>

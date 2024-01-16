@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import Loading from 'src/components/Loading';
 import ProductPreview from 'src/components/ProductPreveiw';
 import { Product } from 'src/types/type';
-import StyledProductList from './StyledProductList';
+import styles from './list.module.scss';
 
 const ProductList = () => {
   const { productType } = useParams();
@@ -20,12 +20,12 @@ const ProductList = () => {
   const products = useMemo(() => productData?.data, [productData]);
 
   return (
-    <section css={StyledProductList}>
+    <section>
       {isLoading && <Loading />}
-      <div className="container">
+      <div className={styles.container}>
         <h3>Cosmetics</h3>
         <h4>{type.toLocaleUpperCase()}</h4>
-        <div className="list">
+        <div className={styles.list}>
           {products?.map(
             (item: Product) =>
               item.price > 0 && (

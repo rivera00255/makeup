@@ -1,0 +1,26 @@
+.container {
+  width: 1020px;
+  margin: 0 auto;
+  padding: 100px 0;
+  min-height: 70vh;
+  text-align: center;
+  > p {
+    color: #888;
+  }
+  > h2 {
+    font-size: 1.5rem;
+    color: #555;
+    font-weight: 600;
+  }
+  > button {
+    background: #888;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    margin-top: 80px;
+    font-weight: 300;
+    &:hover {
+      background-color: #999;
+    }
+  }
+}

@@ -4,7 +4,7 @@ import { Product, ProductColors } from 'src/types/type';
 import { ReactComponent as AddIcon } from '../../assets/icon/plus-small.svg';
 import { ReactComponent as SubIcon } from '../../assets/icon/minus-small.svg';
 import { ReactComponent as CloseIcon } from '../../assets/icon/cross.svg';
-import StyledProductDetail from './StyledProductDetail';
+import styles from './detail.module.scss';
 import { useDispatch } from 'react-redux';
 import { add } from 'src/store/slices/cartSlice';
 import NotFound from 'src/components/NotFound';
@@ -60,17 +60,17 @@ const ProductDetail = () => {
 
   if (product.id === 0) return <NotFound />;
   return (
-    <section css={StyledProductDetail}>
-      <div className="container">
-        <div className="product-wrapper">
-          <div className="detail">
-            <div className="images">
+    <section>
+      <div className={styles.container}>
+        <div className={styles.productWrapper}>
+          <div className={styles.detail}>
+            <div className={styles.images}>
               <img src={product.api_featured_image} alt={product.name} />
             </div>
           </div>
-          <div className="detail">
-            <div className="desc">
-              <div className="info">
+          <div className={styles.detail}>
+            <div className={styles.desc}>
+              <div className={styles.info}>
                 <p>{product.category}</p>
                 <p>
                   <strong>{product.name}</strong>
@@ -78,9 +78,9 @@ const ProductDetail = () => {
                 <div>{product.description}</div>
               </div>
             </div>
-            <div className="order">
+            <div className={styles.order}>
               {product.product_colors?.length > 1 ? (
-                <div className="option">
+                <div className={styles.option}>
                   {product.product_colors.map((color: ProductColors, i: number) => (
                     <label key={i}>
                       <input
@@ -96,7 +96,7 @@ const ProductDetail = () => {
                   ))}
                 </div>
               ) : (
-                <div className="count">
+                <div className={styles.count}>
                   <input type="number" value={count} onChange={(e) => setCount(validateQuantity(Number(e.target.value)))} />
                   <button>
                     <SubIcon width="12px" height="12px" onClick={() => setCount(validateQuantity(count - 1))} />
@@ -107,11 +107,11 @@ const ProductDetail = () => {
                 </div>
               )}
               {Array.from(option.values()).length > 0 && (
-                <div className="option-preview">
+                <div className={styles.optionPreview}>
                   {Array.from(option.values()).map((item, i) => (
-                    <div className="selected" key={i}>
-                      <div className="color">{item.color}</div>
-                      <div className="count">
+                    <div className={styles.selected} key={i}>
+                      <div className={styles.color}>{item.color}</div>
+                      <div className={styles.count}>
                         <input
                           type="number"
                           value={item.quantity}
@@ -137,7 +137,7 @@ const ProductDetail = () => {
                         </button>
                       </div>
                       <button
-                        className="delete-button"
+                        className={styles.deleteButton}
                         onClick={() => {
                           option.delete(item.color);
                           setOption((option) => new Map([...option]));
@@ -148,7 +148,7 @@ const ProductDetail = () => {
                   ))}
                 </div>
               )}
-              <input type="text" value={'$ ' + Number(getTotalPrice(option, product)).toFixed(1)} readOnly className="price" />
+              <input type="text" value={'$ ' + Number(getTotalPrice(option, product)).toFixed(1)} readOnly className={styles.price} />
               <button onClick={() => addCart(option, product, count)} disabled={!stock}>
                 {stock ? '장바구니 담기' : '품 절'}
               </button>

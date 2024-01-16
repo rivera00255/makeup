@@ -1,8 +1,8 @@
-import StyledFooter from './StyledFooter';
+import styles from './footer.module.scss';
 
 const Footer = () => {
   return (
-    <footer css={StyledFooter}>
+    <footer className={styles.footer}>
       <div>Copyright ⓒ Makeup API. All Rights Reserved.</div>
     </footer>
   );

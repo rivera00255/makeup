@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { type } from 'src/components/Header';
 import Loading from 'src/components/Loading';
 import ProductPreview from 'src/components/ProductPreveiw';
-import StyledBrandShop from './StyledBrandShop';
+import styles from './brandShop.module.scss';
 import { Product } from 'src/types/type';
 
 const BrandShop = () => {
@@ -25,12 +25,12 @@ const BrandShop = () => {
   }, [brandName]);
 
   return (
-    <section css={StyledBrandShop}>
+    <section>
       {isLoading && <Loading />}
-      <div className="container">
+      <div className={styles.container}>
         <h4>Brand</h4>
         <h3>{brandName?.toLocaleUpperCase()}</h3>
-        <div className="list-nav">
+        <div className={styles.listNav}>
           <select defaultValue={productType} onChange={(e) => setProductType(e.target.value.toLowerCase())}>
             <option value={''} selected={productType === '' ? true : false}>
               전체
@@ -42,7 +42,7 @@ const BrandShop = () => {
             ))}
           </select>
         </div>
-        <div className="list">
+        <div className={styles.list}>
           {product?.length < 1 && <div>No Product...</div>}
           {product?.map((item: Product) => (
             <Link to={`/product/${item.id}`} key={item.id} state={item}>

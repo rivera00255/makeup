@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import StyledNotFound from './StyledNotFound';
+import styles from './notFound.module.scss';
 
 const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <section css={StyledNotFound}>
-      <div className="container">
+    <section>
+      <div className={styles.container}>
         <p>404</p>
         <h2>Page not found</h2>
         <button onClick={() => navigate('/')}>메인화면으로 이동</button>

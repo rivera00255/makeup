@@ -1,6 +1,5 @@
 import React, { lazy, Suspense, useMemo } from 'react';
-import { Global } from '@emotion/react';
-import reset from './style/reset';
+import './style/reset.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -31,41 +30,38 @@ const RequireAuth = ({ children }: { children: JSX.Element }) => {
 
 function App() {
   return (
-    <>
-      <Global styles={reset} />
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <Routes>
-          <Route
-            path="/*"
-            element={
-              <>
-                <Header />
-                <Suspense fallback={<div></div>}>
-                  <Routes>
-                    <Route path="/" element={<Main />} />
-                    <Route path="/type/:productType" element={<ProductList />} />
-                    <Route path="/brand/:brandName" element={<BrandShop />} />
-                    <Route path="/product/*" element={<ProductDetail />} />
-                    <Route path="/cart" element={<CartList />} />
-                    <Route
-                      path="/mypage"
-                      element={
-                        <RequireAuth>
-                          <MyPage />
-                        </RequireAuth>
-                      }
-                    />
-                  </Routes>
-                </Suspense>
-              </>
-            }
-          />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <Routes>
+        <Route
+          path="/*"
+          element={
+            <>
+              <Header />
+              <Suspense fallback={<div></div>}>
+                <Routes>
+                  <Route path="/" element={<Main />} />
+                  <Route path="/type/:productType" element={<ProductList />} />
+                  <Route path="/brand/:brandName" element={<BrandShop />} />
+                  <Route path="/product/*" element={<ProductDetail />} />
+                  <Route path="/cart" element={<CartList />} />
+                  <Route
+                    path="/mypage"
+                    element={
+                      <RequireAuth>
+                        <MyPage />
+                      </RequireAuth>
+                    }
+                  />
+                </Routes>
+              </Suspense>
+            </>
+          }
+        />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
   );
 }
 

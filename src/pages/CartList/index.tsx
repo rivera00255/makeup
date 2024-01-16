@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Option, Product } from 'src/types/type';
 import { RootState } from 'src/store';
 import { remove, reset } from 'src/store/slices/cartSlice';
-import StyledCartList from './StyledCartList';
+import styles from './cartList.module.scss';
 import { ReactComponent as CloseIcon } from '../../assets/icon/cross.svg';
 
 const CartList = () => {
@@ -26,10 +26,10 @@ const CartList = () => {
   );
 
   return (
-    <section css={StyledCartList}>
-      <div className="container">
+    <section>
+      <div className={styles.container}>
         <h3>Shopping Cart</h3>
-        <label className="checklist">
+        <label className={styles.checklist}>
           <input
             type="checkbox"
             onChange={(e) => {
@@ -43,11 +43,11 @@ const CartList = () => {
           />
           <div>전체 선택 / 해제</div>
         </label>
-        <div className="cart-wrapper">
-          <div className="order-list">
-            {products.length < 1 && <div className="order-product"></div>}
+        <div className={styles.cartWrapper}>
+          <div className={styles.orderList}>
+            {products.length < 1 && <div className={styles.orderProduct}></div>}
             {products?.map((product: Product) => (
-              <div className="order-product" key={product.id}>
+              <div className={styles.orderProduct} key={product.id}>
                 <input
                   type="checkbox"
                   onChange={(e) => {
@@ -59,14 +59,14 @@ const CartList = () => {
                   }}
                   checked={checklist.includes(product) ? true : false}
                 />
-                <div className="product-image">
+                <div className={styles.productImage}>
                   <img src={product.api_featured_image} alt={product.name} />
                 </div>
-                <div className="product-info">
+                <div className={styles.productInfo}>
                   <div>{product.name}</div>
-                  {!product.orderOption && <div className="order-option">{product.orderCount}</div>}
+                  {!product.orderOption && <div className={styles.orderOption}>{product.orderCount}</div>}
                   {product.orderOption?.map((option: Option, i: number) => (
-                    <div className="order-option" key={i}>
+                    <div className={styles.orderOption} key={i}>
                       <div>
                         <p>{option.color}</p>
                         <input type="number" placeholder="quantity" value={option.quantity} readOnly />
@@ -76,7 +76,7 @@ const CartList = () => {
                   <div>{'$ ' + product.price * Number(product.orderCount)}</div>
                   <button
                     type="button"
-                    className="delete-button"
+                    className={styles.deleteButton}
                     onClick={() => {
                       setChecklist((prev) => prev.filter((item) => item.id !== product.id));
                       dispatch(remove(product.id));
@@ -87,16 +87,16 @@ const CartList = () => {
               </div>
             ))}
           </div>
-          <div className="order-summary">
+          <div className={styles.orderSummary}>
             <button
-              className="option-button"
+              className={styles.optionButton}
               onClick={() => {
                 setChecklist([]);
                 dispatch(reset());
               }}>
               전체 삭제
             </button>
-            <div className="summary">
+            <div className={styles.summary}>
               <div>
                 <p>상품금액</p>
                 <p>$ {getTotalOrderPrice(checklist)}</p>
@@ -112,7 +112,7 @@ const CartList = () => {
                 </p>
               </div>
             </div>
-            <button className="order-button" onClick={() => console.log(checklist)}>
+            <button className={styles.orderButton} onClick={() => console.log(checklist)}>
               주문하기
             </button>
             <div>

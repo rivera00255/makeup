@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useOutsideClick } from 'src/hooks/useOutsideClick';
-import StyledSideBar from './StyledBrandAppBar';
+import styles from './appBar.module.scss';
 
 const brands = ['benefit', 'clinique', 'colourpop', 'dior', 'e.l.f.', 'fenty', 'glossier', 'maybelline', 'nyx', 'revlon'];
 
@@ -10,7 +10,7 @@ const BrandAppBar = (props: { visibleAppBar: boolean; setVisibleAppBar: Dispatch
   const targetRef = useOutsideClick(() => props.setVisibleAppBar(false));
 
   return (
-    <div css={StyledSideBar} ref={targetRef}>
+    <div className={styles.bar} ref={targetRef}>
       <h4>Brands List</h4>
       <ul>
         {brands.map((brand) => (
