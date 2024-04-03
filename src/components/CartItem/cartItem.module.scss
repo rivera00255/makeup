@@ -1,0 +1,60 @@
+.orderProduct {
+  padding: 10px 16px;
+  border-top: 2px solid #ddd;
+  display: flex;
+  input[type='checkbox'] {
+    margin-right: 10px;
+  }
+  .productImage {
+    width: 120px;
+    max-height: 120px;
+    margin-right: 40px;
+    object-fit: contain;
+    overflow: hidden;
+    > img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .productInfo {
+    width: calc(100% - 136px);
+    position: relative;
+  }
+  .orderOption {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 200;
+    color: #888;
+    font-size: 14px;
+    > div {
+      display: flex;
+      align-items: center;
+      margin: 2px 0;
+      > p {
+        margin-right: 30px;
+      }
+      > input[type='number'] {
+        max-width: 48px;
+        margin-right: 8px;
+        border-bottom: 1px solid #ebebeb;
+        text-align: center;
+        &:focus {
+          outline: none;
+        }
+      }
+      > button {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 0 5px;
+      }
+    }
+  }
+  .deleteButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+  }
+}

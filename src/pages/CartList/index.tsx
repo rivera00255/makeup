@@ -1,15 +1,53 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Option, Product } from 'src/types/type';
 import { RootState } from 'src/store';
-import { remove, reset } from 'src/store/slices/cartSlice';
+import { edit, remove, reset } from 'src/store/slices/cartSlice';
 import styles from './cartList.module.scss';
-import { ReactComponent as CloseIcon } from '../../assets/icon/cross.svg';
+import { validateQuantity } from '../ProductDetail/utilities';
+import CartItem from 'src/components/CartItem';
 
 const CartList = () => {
-  const products = useSelector((state: RootState) => state.cart);
+  const cartItems = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-  const [checklist, setChecklist] = useState<Product[]>([...products]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [checklist, setChecklist] = useState<Product[]>([]);
+  // console.log(products);
+
+  const calcQuantity = (value: number, mode: 'add' | 'subtract') => {
+    if (mode === 'add') return validateQuantity(value + 1);
+    if (mode === 'subtract') return validateQuantity(value - 1);
+    return value;
+  };
+
+  const handleOrderOption = (product: Product, option: Option, mode: 'add' | 'subtract' | 'delete') => {
+    if (product.orderOption) {
+      if (mode !== 'delete') {
+        const updatedOption = product.orderOption.map((item) => (item.color === option.color ? { ...item, quantity: calcQuantity(option.quantity, mode) } : { ...item }));
+        let totalQuantity = 0;
+        updatedOption.forEach((item) => (totalQuantity += Number(item.quantity)));
+        const updated = { ...product, orderOption: updatedOption, orderCount: totalQuantity, orderPrice: (totalQuantity * product.price).toFixed(2) };
+        dispatch(edit(updated));
+      } else {
+        const selected = product.orderOption.find((item) => item.color === option.color);
+        const updatedOption = product.orderOption.filter((item) => item.color !== option.color);
+        if (updatedOption.length < 1) {
+          dispatch(remove(product.id));
+          return;
+        }
+        const quantity = validateQuantity(Number(product.orderCount) - Number(selected?.quantity));
+        const updated = { ...product, orderOption: updatedOption, orderCount: quantity, orderPrice: (quantity * product.price).toFixed(2) };
+        dispatch(edit(updated));
+      }
+    }
+  };
+
+  const handleOrderCount = (product: Product, mode: 'add' | 'subtract') => {
+    if (typeof product.orderCount === 'undefined') return;
+    const quantity = calcQuantity(product.orderCount, mode);
+    const updated = { ...product, orderCount: quantity, orderPrice: (quantity * product.price).toFixed(2) };
+    dispatch(edit(updated));
+  };
 
   const getTotalOrderPrice = useCallback((checklist: Product[]) => {
     let price = 0;
@@ -24,6 +62,11 @@ const CartList = () => {
     },
     [getTotalOrderPrice]
   );
+
+  useEffect(() => {
+    setProducts(cartItems);
+    setChecklist(cartItems);
+  }, [cartItems]);
 
   return (
     <section>
@@ -47,44 +90,7 @@ const CartList = () => {
           <div className={styles.orderList}>
             {products.length < 1 && <div className={styles.orderProduct}></div>}
             {products?.map((product: Product) => (
-              <div className={styles.orderProduct} key={product.id}>
-                <input
-                  type="checkbox"
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setChecklist((prev) => [...prev, product]);
-                    } else {
-                      setChecklist((prev) => prev.filter((item) => item.id !== product.id));
-                    }
-                  }}
-                  checked={checklist.includes(product) ? true : false}
-                />
-                <div className={styles.productImage}>
-                  <img src={product.api_featured_image} alt={product.name} />
-                </div>
-                <div className={styles.productInfo}>
-                  <div>{product.name}</div>
-                  {!product.orderOption && <div className={styles.orderOption}>{product.orderCount}</div>}
-                  {product.orderOption?.map((option: Option, i: number) => (
-                    <div className={styles.orderOption} key={i}>
-                      <div>
-                        <p>{option.color}</p>
-                        <input type="number" placeholder="quantity" value={option.quantity} readOnly />
-                      </div>
-                    </div>
-                  ))}
-                  <div>{'$ ' + product.price * Number(product.orderCount)}</div>
-                  <button
-                    type="button"
-                    className={styles.deleteButton}
-                    onClick={() => {
-                      setChecklist((prev) => prev.filter((item) => item.id !== product.id));
-                      dispatch(remove(product.id));
-                    }}>
-                    <CloseIcon width="10px" height="10px" fill="#888" />
-                  </button>
-                </div>
-              </div>
+              <CartItem key={product.id} product={product} checklist={checklist} setChecklist={setChecklist} handleOrderOption={handleOrderOption} handleOrderCount={handleOrderCount} />
             ))}
           </div>
           <div className={styles.orderSummary}>

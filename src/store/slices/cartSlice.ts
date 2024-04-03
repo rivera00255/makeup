@@ -15,6 +15,12 @@ export const cartSlice = createSlice({
       }
       return state;
     },
+    edit: (state, action) => {
+      const index = state.findIndex((item) => item.id === action.payload.id);
+      if (index < 0) return state;
+      state.splice(index, 1, action.payload);
+      return state;
+    },
     remove: (state, action) => {
       return state.filter((item) => item.id !== action.payload);
     },
@@ -26,5 +32,5 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { add, remove, reset } = cartSlice.actions;
+export const { add, remove, reset, edit } = cartSlice.actions;
 export default cartSlice.reducer;

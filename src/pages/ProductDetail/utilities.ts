@@ -18,7 +18,10 @@ export const calculateOption = (option: Map<string, { color: string; quantity: n
   return option;
 };
 
-export const getTotalPrice = (option: Map<string, { color: string; quantity: number }>, product: Product) => {
+export const getTotalPrice = (product: Product, option: Map<string, { color: string; quantity: number }>, quantity?: number) => {
+  if (quantity) {
+    return product.price * quantity;
+  }
   let count = 0;
   Array.from(option.values()).map((item) => (count += item.quantity));
   if (count > 0) {
