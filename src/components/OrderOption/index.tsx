@@ -12,8 +12,6 @@ const OrderOption = ({ product }: { product: Product }) => {
   const [option, setOption] = useState(new Map());
   const [count, setCount] = useState(1);
   const [stock, setStock] = useState(true);
-  // console.log(option);
-  // console.log(product);
 
   const dispatch = useDispatch();
 

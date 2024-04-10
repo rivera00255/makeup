@@ -1,5 +1,4 @@
 import React, { lazy, Suspense, useMemo } from 'react';
-import './style/reset.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
