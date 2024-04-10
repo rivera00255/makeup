@@ -1,8 +1,5 @@
 # Fake Store
 
-**🚀 배포 →**
-[http://rivera00255.github.io/makeup](http://rivera00255.github.io/makeup)
-
 ![screen01](https://user-images.githubusercontent.com/93629526/204417770-cf4defe3-41d3-4521-b6c6-6ed666fdbf81.jpg)
 
 ---
