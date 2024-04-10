@@ -1,5 +1,5 @@
 import styles from './signup.module.scss';
-import { ReactComponent as LeftArrowIcon } from '../../assets/icon/angle-left.svg';
+import LeftArrowIcon from '../../assets/icon/angle-left.svg?react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDaumPostcodePopup } from 'react-daum-postcode';

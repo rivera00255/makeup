@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ReactComponent as MenuIcon } from '../../assets/icon/menu-burger.svg';
+import MenuIcon from '../../assets/icon/menu-burger.svg?react';
 import BrandAppBar from '../BrandAppBar';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

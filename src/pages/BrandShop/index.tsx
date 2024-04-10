@@ -9,7 +9,7 @@ import styles from './brandShop.module.scss';
 import { Product } from 'src/types/type';
 
 const BrandShop = () => {
-  const baseUrl = process.env.REACT_APP_API_URL;
+  const baseUrl = import.meta.env.VITE_API_URL;
   const { brandName } = useParams();
   const [productType, setProductType] = useState('');
 

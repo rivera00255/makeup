@@ -30,7 +30,7 @@ const RequireAuth = ({ children }: { children: JSX.Element }) => {
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter>
       <Routes>
         <Route
           path="/*"

@@ -4,14 +4,14 @@ import { Product } from 'src/types/type';
 import ProductPreview from 'src/components/ProductPreveiw';
 import { Link } from 'react-router-dom';
 import Carousel from 'src/components/Carousel';
-import { ReactComponent as GiftIcon } from '../../assets/icon/gift.svg';
+import GiftIcon from '../../assets/icon/gift.svg?react';
 import axios from 'axios';
 import styles from './main.module.scss';
 
 const Main = () => {
   const recommendBrand = 'glossier';
   const { data: productData } = useQuery(['product', recommendBrand], () => {
-    return axios.get(`${process.env.REACT_APP_API_URL}?brand=${recommendBrand}`);
+    return axios.get(`${import.meta.env.VITE_API_URL}?brand=${recommendBrand}`);
   });
 
   const products = useMemo(() => productData?.data.slice(0, 4), [productData]);

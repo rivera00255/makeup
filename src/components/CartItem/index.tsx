@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Option, Product } from 'src/types/type';
 import styles from './cartItem.module.scss';
-import { ReactComponent as CloseIcon } from '../../assets/icon/cross.svg';
-import { ReactComponent as AddIcon } from '../../assets/icon/plus-small.svg';
-import { ReactComponent as SubIcon } from '../../assets/icon/minus-small.svg';
+import CloseIcon from '../../assets/icon/cross.svg?react';
+import AddIcon from '../../assets/icon/plus-small.svg?react';
+import SubIcon from '../../assets/icon/minus-small.svg?react';
 import { useDispatch } from 'react-redux';
 import { remove } from 'src/store/slices/cartSlice';
 

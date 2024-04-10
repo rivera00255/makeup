@@ -2,9 +2,9 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { calculateOption, getTotalPrice, validateQuantity } from 'src/pages/ProductDetail/utilities';
 import { Product, ProductColors } from 'src/types/type';
 import styles from './option.module.scss';
-import { ReactComponent as AddIcon } from '../../assets/icon/plus-small.svg';
-import { ReactComponent as SubIcon } from '../../assets/icon/minus-small.svg';
-import { ReactComponent as CloseIcon } from '../../assets/icon/cross.svg';
+import AddIcon from '../../assets/icon/plus-small.svg?react';
+import SubIcon from '../../assets/icon/minus-small.svg?react';
+import CloseIcon from '../../assets/icon/cross.svg?react';
 import { useDispatch } from 'react-redux';
 import { add } from 'src/store/slices/cartSlice';
 

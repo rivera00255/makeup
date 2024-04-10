@@ -1,5 +1,5 @@
 import styles from './login.module.scss';
-import { ReactComponent as LeftArrowIcon } from '../../assets/icon/angle-left.svg';
+import LeftArrowIcon from '../../assets/icon/angle-left.svg?react';
 import { useNavigate } from 'react-router-dom';
 import { SyntheticEvent, useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
@@ -17,7 +17,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  const authBaseUrl = process.env.REACT_APP_USER_API_URL;
+  const authBaseUrl = import.meta.env.VITE_USER_API_URL;
 
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);

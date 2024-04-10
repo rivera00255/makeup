@@ -10,7 +10,7 @@ import styles from './list.module.scss';
 const ProductList = () => {
   const { productType } = useParams();
   const type = productType?.toString() as string;
-  const baseUrl = process.env.REACT_APP_API_URL;
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   const { data: productData, isLoading } = useQuery(['product', type], () => {
     const response = axios.get(`${baseUrl}?product_type=${type}`);
